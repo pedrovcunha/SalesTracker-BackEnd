@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\" />
+    <ProjectReference Include="..\SalesTracker.Domain\SalesTracker.Domain.csproj" />
   </ItemGroup>
 
 </Project>

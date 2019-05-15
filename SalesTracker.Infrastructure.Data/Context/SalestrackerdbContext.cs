@@ -1,16 +1,17 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using SalesTracker.Domain.Entities;
 
-namespace SalesTracker.Domain.Entities
+namespace SalesTracker.Infrastructure.Data.Context
 {
-    public partial class salestrackerdbContext : DbContext
+    public partial class SalestrackerdbContext : DbContext
     {
-        public salestrackerdbContext()
+        public SalestrackerdbContext()
         {
         }
 
-        public salestrackerdbContext(DbContextOptions<salestrackerdbContext> options)
+        public SalestrackerdbContext(DbContextOptions<SalestrackerdbContext> options)
             : base(options)
         {
         }
