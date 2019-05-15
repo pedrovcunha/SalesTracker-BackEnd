@@ -4,7 +4,7 @@ using SalesTracker.Infrastructure.Data.Context;
 
 namespace SalesTracker.Infrastructure.Data.Repositories
 {
-    class PromotionalAgenciesRepository : GenericRepository<PromotionalAgencies>, IPromotionalAgenciesRepository
+    public class PromotionalAgenciesRepository : GenericRepository<PromotionalAgencies>, IPromotionalAgenciesRepository
     {
         public PromotionalAgenciesRepository(SalestrackerdbContext pDbContext) : base(pDbContext)
         {

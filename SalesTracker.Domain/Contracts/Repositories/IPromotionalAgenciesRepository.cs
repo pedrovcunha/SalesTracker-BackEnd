@@ -1,6 +1,8 @@
-﻿namespace SalesTracker.Domain.Contracts.Repositories
+﻿using SalesTracker.Domain.Entities;
+
+namespace SalesTracker.Domain.Contracts.Repositories
 {
-    public interface IPromotionalAgenciesRepository : IGenericRepository<PromotinalAgencies, int>
+    public interface IPromotionalAgenciesRepository : IGenericRepository<PromotionalAgencies>
     {
     }
 }

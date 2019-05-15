@@ -6,19 +6,17 @@ using System.Linq.Expressions;
 
 namespace SalesTracker.Domain.Contracts.Repositories
 {
-    public interface IGenericRepository<TEntity> where TEntity : class
+    public interface IGenericRepository<T> where T : class
     {
-        void Add(TEntity pObj);
-        //IQueryable<TEntity> GetAll();
-        //IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>>[] pExpressions, Expression<Func<TEntity, object>>[] pIncludeProperties = null);
-        
-        IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> pFilter, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> pOrderBy = null, string includeProperties = "");
-        TEntity GetByID(object pId);
-        void Insert(TEntity pEntity);
+        IQueryable<T> GetAll();
+        IQueryable<T> GetAll(Expression<Func<T, bool>>[] pExpressions, Expression<Func<T, object>>[] pIncludeProperties = null);
+        IEnumerable<T> Get(Expression<Func<T, bool>> pFilter, Func<IQueryable<T>, IOrderedQueryable<T>> pOrderBy = null, string includeProperties = "");
+        T GetByID(object pId);
+        void Insert(T pEntity);
         void Delete(object pId);
-        void Delete(TEntity pEntityToDelete);
-        void Update(TEntity pEntityToUpdate);
+        void Delete(T pEntityToDelete);
+        void Update(T pEntityToUpdate);
 
-        //EntityEntry<TEntity> Entry(TEntity entity);
+        EntityEntry<T> Entry(T entity);
     }
 }

@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.452
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesTracker-BackEnd", "SalesTracker-BackEnd\SalesTracker-BackEnd.csproj", "{2A6E78E4-1A07-4E14-A831-B6E6EFDEEE5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalesTracker.BackEnd", "SalesTracker-BackEnd\SalesTracker.BackEnd.csproj", "{2A6E78E4-1A07-4E14-A831-B6E6EFDEEE5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesTracker.Domain", "SalesTracker.Domain\SalesTracker.Domain.csproj", "{D9D72599-3CE9-47B6-946F-65AB9DB00234}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalesTracker.Domain", "SalesTracker.Domain\SalesTracker.Domain.csproj", "{D9D72599-3CE9-47B6-946F-65AB9DB00234}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesTracker.Infrastructure.Data", "SalesTracker.Infrastructure.Data\SalesTracker.Infrastructure.Data.csproj", "{10AA16BC-D98E-46B8-81A6-208634ACF417}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalesTracker.Infrastructure.Data", "SalesTracker.Infrastructure.Data\SalesTracker.Infrastructure.Data.csproj", "{10AA16BC-D98E-46B8-81A6-208634ACF417}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

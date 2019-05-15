@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SalesTracker.Infrastructure.Data.Repositories
 {
-    public class AddressesRepository : GenericRepository<Addresses>, IAddressRepository
+    public class AddressesRepository : GenericRepository<Addresses>, IAddressesRepository
     {
         public AddressesRepository(SalestrackerdbContext pDbContext) : base(pDbContext)
         {

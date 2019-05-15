@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using LinqKit;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using SalesTracker.Domain.Contracts.Repositories;
 using SalesTracker.Infrastructure.Data.Context;
 using System;
@@ -9,20 +11,46 @@ using System.Text;
 
 namespace SalesTracker.Infrastructure.Data.Repositories
 {
-    public class GenericRepository<TEntity> where TEntity : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         internal SalestrackerdbContext _context;
-        internal DbSet<TEntity> _dbSet;
+        internal DbSet<T> _dbSet;
 
         public GenericRepository(SalestrackerdbContext context)
         {
-            _context = _context;
-            this._dbSet = _context.Set<TEntity>();
+            _context = context;
+            this._dbSet = _context.Set<T>();
         }
 
-        public virtual IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "")
+        public IQueryable<T> GetAll(Expression<Func<T, bool>>[] pExpressions, Expression<Func<T, object>>[] pIncludeProperties = null)
         {
-            IQueryable<TEntity> query = _dbSet;
+            if (pExpressions == null) throw new ArgumentNullException(nameof(pExpressions));
+            if (pExpressions.Length == 0) throw new ArgumentException("EXCEPTION_ARGUMENT_CANNOT_BE_AN_EMPTY_COLLECTION", nameof(pExpressions));
+
+            IQueryable<T> items = _dbSet;
+
+            var predicate = PredicateBuilder.New<T>(true);
+
+            foreach (var expression in pExpressions)
+                predicate.And(expression);
+
+            items = items.Where(predicate);
+
+            if (pIncludeProperties != null)
+            {
+                items = pIncludeProperties.Aggregate(items, (current, includeProperty) => current.Include(includeProperty));
+            }
+
+            return items;
+        }
+
+        public IQueryable<T> GetAll()
+        {
+            return _dbSet;
+        }
+        public virtual IEnumerable<T> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = "")
+        {
+            IQueryable<T> query = _dbSet;
 
             if (filter != null)
             {
@@ -45,23 +73,23 @@ namespace SalesTracker.Infrastructure.Data.Repositories
             }
         }
 
-        public virtual TEntity GetByID(object pId)
+        public virtual T GetByID(object pId)
         {
             return _dbSet.Find(pId);
         }
-
-        public virtual void Insert(TEntity pEntity)
+        
+        public virtual void Insert(T pEntity)
         {
             _dbSet.Add(pEntity);
         }
 
         public virtual void Delete(object pId)
         {
-            TEntity entityToDelete = _dbSet.Find(pId);
+            T entityToDelete = _dbSet.Find(pId);
             Delete(entityToDelete);
         }
 
-        public virtual void Delete(TEntity pEntityToDelete)
+        public virtual void Delete(T pEntityToDelete)
         {
             if (_context.Entry(pEntityToDelete).State == EntityState.Detached)
             {
@@ -70,38 +98,18 @@ namespace SalesTracker.Infrastructure.Data.Repositories
             _dbSet.Remove(pEntityToDelete);
         }
 
-        public virtual void Update(TEntity pEntityToUpdate)
+        public virtual void Update(T pEntityToUpdate)
         {
             _dbSet.Attach(pEntityToUpdate);
             _context.Entry(pEntityToUpdate).State = EntityState.Modified;
         }
 
-        //public IQueryable<TEntity> GetAll(Expression<Func<TEntity, bool>>[] pExpressions, Expression<Func<TEntity, object>>[] pIncludeProperties = null)
-        //{
-        //    if (pExpressions == null) throw new ArgumentNullException(nameof(pExpressions));
-        //    if (pExpressions.Length == 0) throw new ArgumentException(ApiExceptionsMsg.EXCEPTION_ARGUMENT_CANNOT_BE_AN_EMPTY_COLLECTION, nameof(pExpressions));
+        public EntityEntry<T> Entry(T entity)
+        {
+            return _context.Entry(entity);
+        }
 
-        //    IQueryable<TEntity> items = Context.Set<TEntity>();
-
-        //    var predicate = PredicateBuilder.New<TEntity>(true);
-
-        //    foreach (var expression in pExpressions)
-        //        predicate.And(expression);
-
-        //    items = items.Where(predicate);
-
-        //    if (pIncludeProperties != null)
-        //    {
-        //        items = pIncludeProperties.Aggregate(items, (current, includeProperty) => current.Include(includeProperty));
-        //    }
-
-        //    return items;
-        //}
-
-        //public IQueryable<TEntity> GetAll()
-        //{
-        //    return Context.Set<TEntity>();
-        //}
+        
 
     }
 }

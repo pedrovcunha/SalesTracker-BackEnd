@@ -6,7 +6,7 @@ namespace SalesTracker.Domain.Contracts.UnitOfWork
     public interface IUnitOfWork
     {
         #region Contracts IoC
-        IAddressRepository Addresses { get; }
+        IAddressesRepository Addresses { get; }
         ICountriesRepository Countries { get; }
         ICustomersRepository Customers { get; }
         IItemCategoriesRepository ItemCategories { get; }
@@ -20,10 +20,8 @@ namespace SalesTracker.Domain.Contracts.UnitOfWork
         IStatesRepository States { get; }
         #endregion
 
-        #region Commits
-
-        Task<int> CommitAsync(bool pIgnoreUnchangedItems = true);
-        //Task<Audit> CommitAndReturnAuditAsync(bool pIgnoreUnchangedItems = true);
+        #region Methods
+        
         void Dispose();
 
         #endregion

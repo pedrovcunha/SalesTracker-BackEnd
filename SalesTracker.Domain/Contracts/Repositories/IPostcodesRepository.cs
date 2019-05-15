@@ -2,7 +2,7 @@
 
 namespace SalesTracker.Domain.Contracts.Repositories
 {
-    public interface IPostcodesRepository : IGenericRepository<Postcodes, int>
+    public interface IPostcodesRepository : IGenericRepository<Postcodes>
     {
     }
 }

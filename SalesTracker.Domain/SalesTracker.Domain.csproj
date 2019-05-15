@@ -23,18 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="DatabaseDiagram\SalesTracker.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>SalesTracker.xsd</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="DatabaseDiagram\SalesTracker.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>SalesTracker.Designer.cs</LastGenOutput>
-    </None>
+    <Folder Include="DatabaseDiagram\" />
   </ItemGroup>
 
 </Project>

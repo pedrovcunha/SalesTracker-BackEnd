@@ -2,7 +2,7 @@
 
 namespace SalesTracker.Domain.Contracts.Repositories
 {
-    public interface IRetailStoresRepository : IGenericRepository<RetailStores, int>
+    public interface IRetailStoresRepository : IGenericRepository<RetailStores>
     {
     }
 }
