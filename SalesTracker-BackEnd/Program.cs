@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace SalesTracker.BackEnd
+namespace SalesTracker.WebAPI
 {
     public class Program
     {

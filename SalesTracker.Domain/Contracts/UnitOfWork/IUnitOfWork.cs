@@ -20,7 +20,8 @@ namespace SalesTracker.Domain.Contracts.UnitOfWork
         #endregion
 
         #region Methods
-        
+        void Save();
+
         void Dispose();
 
         #endregion

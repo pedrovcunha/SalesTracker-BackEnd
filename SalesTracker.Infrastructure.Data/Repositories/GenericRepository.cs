@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace SalesTracker.Infrastructure.Data.Repositories
 {
@@ -83,7 +84,7 @@ namespace SalesTracker.Infrastructure.Data.Repositories
             _dbSet.Add(pEntity);
         }
 
-        public virtual void Delete(object pId)
+        public virtual void Delete(int pId)
         {
             T entityToDelete = _dbSet.Find(pId);
             Delete(entityToDelete);
@@ -109,7 +110,23 @@ namespace SalesTracker.Infrastructure.Data.Repositories
             return _context.Entry(entity);
         }
 
+        #region Async Methods
+        public async Task<T> FindAsync(int pId)
+        {
+            return await _dbSet.FindAsync(pId);
+        }
+
+        public async Task<T> AddAsync(T pEntity)
+        {
+            await _dbSet.AddAsync(pEntity);
+            return pEntity;
+        }
+
         
+
+                #endregion
+
+
 
     }
 }

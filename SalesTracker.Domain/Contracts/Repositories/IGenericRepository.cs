@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace SalesTracker.Domain.Contracts.Repositories
 {
@@ -13,10 +14,14 @@ namespace SalesTracker.Domain.Contracts.Repositories
         IEnumerable<T> Get(Expression<Func<T, bool>> pFilter, Func<IQueryable<T>, IOrderedQueryable<T>> pOrderBy = null, string includeProperties = "");
         T GetByID(object pId);
         void Insert(T pEntity);
-        void Delete(object pId);
+        void Delete(int pId);
         void Delete(T pEntityToDelete);
         void Update(T pEntityToUpdate);
 
         EntityEntry<T> Entry(T entity);
+
+        Task<T> FindAsync(int pId);
+
+        Task<T> AddAsync(T pEntity);
     }
 }

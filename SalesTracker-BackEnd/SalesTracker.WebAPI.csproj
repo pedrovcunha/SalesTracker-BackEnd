@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-    <RootNamespace>SalesTracker_BackEnd</RootNamespace>
+    <RootNamespace>SalesTracker.WebAPI</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

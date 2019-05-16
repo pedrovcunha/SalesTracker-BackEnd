@@ -19,7 +19,7 @@ using SalesTracker.Infrastructure.Data.Repositories;
 using SalesTracker.Infrastructure.Data.UnitOfWork;
 
 
-namespace SalesTracker.BackEnd
+namespace SalesTracker.WebAPI
 {
     public class Startup
     {
