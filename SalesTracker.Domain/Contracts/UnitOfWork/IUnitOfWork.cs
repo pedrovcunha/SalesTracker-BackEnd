@@ -8,9 +8,8 @@ namespace SalesTracker.Domain.Contracts.UnitOfWork
         #region Contracts IoC
         IAddressesRepository Addresses { get; }
         ICountriesRepository Countries { get; }
-        ICustomersRepository Customers { get; }
-        IItemCategoriesRepository ItemCategories { get; }
-        IOrderItemsRepository OrderItems { get; }
+        IBrandCategoriesRepository ItemCategories { get; }
+        IOrderProductsRepository OrderItems { get; }
         IOrdersRepository Orders { get; }
         IPeopleRepository People { get; }
         IPostcodesRepository Postcodes { get; }

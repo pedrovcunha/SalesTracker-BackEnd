@@ -37,10 +37,9 @@ namespace SalesTracker.BackEnd
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IAddressesRepository, AddressesRepository>();
             services.AddScoped<ICountriesRepository, CountriesRepository>();
-            services.AddScoped<ICustomersRepository, CustomersRepository>();
-            services.AddScoped<IItemCategoriesRepository, ItemCategoriesRepository>();
-            services.AddScoped<IItemsRepository, ItemsRepository>();
-            services.AddScoped<IOrderItemsRepository, OrderItemsRepository>();
+            services.AddScoped<IBrandCategoriesRepository, BrandCategoriesRepository>();
+            services.AddScoped<IProductRepository, ProductssRepository>();
+            services.AddScoped<IOrderProductsRepository, OrderProductsRepository>();
             services.AddScoped<IOrdersRepository, OrdersRepository>();
             services.AddScoped<IPeopleRepository, PeopleRepository>();
             services.AddScoped<IPostcodesRepository, PostcodesRepository>();
@@ -58,8 +57,8 @@ namespace SalesTracker.BackEnd
             // Add responseCaching in thr browser.
             services.AddResponseCaching();
 
-            var connection = "Server=salestrackerdbinstance.caqbw1dpdyst.ap-southeast-2.rds.amazonaws.com; Initial Catalog=salestrackerdb; User ID = salesTrackerdb; Password = tEh2GktSeoh2; MultipleActiveResultSets=False; Encrypt=True; TrustServerCertificate=True;";
-            services.AddDbContext<SalestrackerdbContext>(options => options.UseSqlServer(connection));
+            //var connection = "Server=salestrackerdbinstance.caqbw1dpdyst.ap-southeast-2.rds.amazonaws.com; Initial Catalog=salestrackerdb; User ID = salesTrackerdb; Password = tEh2GktSeoh2; MultipleActiveResultSets=False; Encrypt=True; TrustServerCertificate=True;";
+            services.AddDbContext<SalestrackerdbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SalesTrackerDatabse")));
 
             
         }

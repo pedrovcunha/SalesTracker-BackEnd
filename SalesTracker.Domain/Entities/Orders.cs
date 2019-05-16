@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SalesTracker.Domain.Entities
 {
@@ -7,20 +8,18 @@ namespace SalesTracker.Domain.Entities
     {
         public Orders()
         {
-            OrderItems = new HashSet<OrderItems>();
+            OrderProducts = new HashSet<OrderProducts>();
         }
 
         public int Id { get; set; }
         public int SalesRepresentativeId { get; set; }
-        public int? CustomerId { get; set; }
         public int? RetailStoreId { get; set; }
         public DateTime? OrderDate { get; set; }
         public decimal? TotalPrice { get; set; }
         public decimal? Commission { get; set; }
 
-        public virtual Customers Customer { get; set; }
         public virtual RetailStores RetailStore { get; set; }
         public virtual SalesRepresentatives SalesRepresentative { get; set; }
-        public virtual ICollection<OrderItems> OrderItems { get; set; }
+        public virtual ICollection<OrderProducts> OrderProducts { get; set; }
     }
 }

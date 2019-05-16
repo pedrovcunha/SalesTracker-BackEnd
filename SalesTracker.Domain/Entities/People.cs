@@ -7,7 +7,7 @@ namespace SalesTracker.Domain.Entities
     {
         public People()
         {
-            Customers = new HashSet<Customers>();
+            BrandCategory = new HashSet<BrandCategory>();
         }
 
         public int Id { get; set; }
@@ -19,6 +19,6 @@ namespace SalesTracker.Domain.Entities
         public int? AddressId { get; set; }
 
         public virtual Addresses Address { get; set; }
-        public virtual ICollection<Customers> Customers { get; set; }
+        public virtual ICollection<BrandCategory> BrandCategory { get; set; }
     }
 }

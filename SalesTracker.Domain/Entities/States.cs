@@ -7,7 +7,7 @@ namespace SalesTracker.Domain.Entities
     {
         public States()
         {
-            Adresses = new HashSet<Addresses>();
+            Addresses = new HashSet<Addresses>();
             Postcodes = new HashSet<Postcodes>();
         }
 
@@ -18,7 +18,7 @@ namespace SalesTracker.Domain.Entities
         public int? CountryId { get; set; }
 
         public virtual Countries Country { get; set; }
-        public virtual ICollection<Addresses> Adresses { get; set; }
+        public virtual ICollection<Addresses> Addresses { get; set; }
         public virtual ICollection<Postcodes> Postcodes { get; set; }
     }
 }

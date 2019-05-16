@@ -14,8 +14,10 @@ namespace SalesTracker.Domain.Entities
         public int PersonId { get; set; }
         public string JobTitle { get; set; }
         public int? PromotionAgencyId { get; set; }
+        public int? RetailStoreId { get; set; }
 
         public virtual PromotionalAgencies PromotionAgency { get; set; }
+        public virtual RetailStores RetailStore { get; set; }
         public virtual ICollection<Orders> Orders { get; set; }
     }
 }

@@ -14,10 +14,9 @@ namespace SalesTracker.Infrastructure.Data.UnitOfWork
         private readonly SalestrackerdbContext _context = new SalestrackerdbContext();
         private AddressesRepository _addressesRepository;
         private CountriesRepository _countriesRepository;
-        private CustomersRepository _customersRepository;
-        private ItemCategoriesRepository _itemCategoriesRepository;
-        private ItemsRepository _itemsRepository;
-        private OrderItemsRepository _orderItemsRepository;
+        private BrandCategoriesRepository _itemCategoriesRepository;
+        private ProductssRepository _itemsRepository;
+        private OrderProductsRepository _orderItemsRepository;
         private OrdersRepository _ordersRepository;
         private PeopleRepository _peopleRepository;
         private PostcodesRepository _postcodesRepository;
@@ -29,10 +28,9 @@ namespace SalesTracker.Infrastructure.Data.UnitOfWork
 
         public IAddressesRepository Addresses => _addressesRepository ?? (_addressesRepository = new AddressesRepository(_context));
         public ICountriesRepository Countries => _countriesRepository ?? (_countriesRepository = new CountriesRepository(_context));
-        public ICustomersRepository Customers => _customersRepository ?? (_customersRepository = new CustomersRepository(_context));
-        public IItemCategoriesRepository ItemCategories => _itemCategoriesRepository ?? (_itemCategoriesRepository = new ItemCategoriesRepository(_context));
-        public IItemsRepository Items => _itemsRepository ?? (_itemsRepository = new ItemsRepository(_context));
-        public IOrderItemsRepository OrderItems => _orderItemsRepository ?? (_orderItemsRepository = new OrderItemsRepository(_context));
+        public IBrandCategoriesRepository ItemCategories => _itemCategoriesRepository ?? (_itemCategoriesRepository = new BrandCategoriesRepository(_context));
+        public IProductRepository Items => _itemsRepository ?? (_itemsRepository = new ProductssRepository(_context));
+        public IOrderProductsRepository OrderItems => _orderItemsRepository ?? (_orderItemsRepository = new OrderProductsRepository(_context));
         public IOrdersRepository Orders => _ordersRepository ?? (_ordersRepository = new OrdersRepository(_context));
         public IPeopleRepository People=> _peopleRepository ?? (_peopleRepository = new PeopleRepository(_context));
         public IPostcodesRepository Postcodes => _postcodesRepository ?? (_postcodesRepository = new PostcodesRepository(_context));

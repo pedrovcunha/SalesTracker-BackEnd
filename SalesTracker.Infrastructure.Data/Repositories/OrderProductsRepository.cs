@@ -4,9 +4,9 @@ using SalesTracker.Infrastructure.Data.Context;
 
 namespace SalesTracker.Infrastructure.Data.Repositories
 {
-    public class ItemCategoriesRepository : GenericRepository<ItemCategories>, IItemCategoriesRepository
+    public class OrderProductsRepository : GenericRepository<OrderProducts>, IOrderProductsRepository
     {
-        public ItemCategoriesRepository(SalestrackerdbContext pDbContext):base(pDbContext)
+        public OrderProductsRepository(SalestrackerdbContext pDbContext):base(pDbContext)
         {
 
         }
