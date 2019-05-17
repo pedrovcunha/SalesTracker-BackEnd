@@ -14,9 +14,9 @@ namespace SalesTracker.WebAPI.Controllers
     [ApiController]
     public class StatesController : ControllerBase
     {
-        private readonly SalestrackerdbContext _context;
+        private readonly Salestrackerdbcontext _context;
 
-        public StatesController(SalestrackerdbContext context)
+        public StatesController(Salestrackerdbcontext context)
         {
             _context = context;
         }

@@ -14,9 +14,9 @@ namespace SalesTracker.WebAPI.Controllers
     [ApiController]
     public class PostcodesController : ControllerBase
     {
-        private readonly SalestrackerdbContext _context;
+        private readonly Salestrackerdbcontext _context;
 
-        public PostcodesController(SalestrackerdbContext context)
+        public PostcodesController(Salestrackerdbcontext context)
         {
             _context = context;
         }

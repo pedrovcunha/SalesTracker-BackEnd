@@ -9,7 +9,7 @@ namespace SalesTracker.Infrastructure.Data.Repositories
 {
     public class PostcodesRepository : GenericRepository<Postcodes>, IPostcodesRepository
     {
-        public PostcodesRepository(SalestrackerdbContext pDbContext) : base(pDbContext)
+        public PostcodesRepository(Salestrackerdbcontext pDbContext) : base(pDbContext)
         {
 
         }

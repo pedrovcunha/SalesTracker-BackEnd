@@ -6,7 +6,7 @@ namespace SalesTracker.Infrastructure.Data.Repositories
 {
     public class CountriesRepository: GenericRepository<Countries>, ICountriesRepository
     {
-        public CountriesRepository(SalestrackerdbContext pDbContext) : base(pDbContext)
+        public CountriesRepository(Salestrackerdbcontext pDbContext) : base(pDbContext)
         {
 
         }

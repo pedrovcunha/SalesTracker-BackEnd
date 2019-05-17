@@ -14,10 +14,10 @@ namespace SalesTracker.Infrastructure.Data.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        internal SalestrackerdbContext _context;
+        internal Salestrackerdbcontext _context;
         internal DbSet<T> _dbSet;
 
-        public GenericRepository(SalestrackerdbContext context)
+        public GenericRepository(Salestrackerdbcontext context)
         {
             _context = context;
             this._dbSet = _context.Set<T>();

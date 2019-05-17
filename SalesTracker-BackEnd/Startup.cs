@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -48,6 +49,8 @@ namespace SalesTracker.WebAPI
             services.AddScoped<ISalesRepresentativesRepository, SalesRepresentativesRepository>();
             services.AddScoped<IStatesRepository, StatesRepository>();
 
+            // https://stackoverflow.com/questions/38338475/no-database-provider-has-been-configured-for-this-dbcontext-on-signinmanager-p
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             //AddDefaultRepositories(services);
 
             services.Configure<IISServerOptions>(options =>
@@ -61,7 +64,7 @@ namespace SalesTracker.WebAPI
             services.AddResponseCaching();
 
             //var connection = "Server=salestrackerdbinstance.caqbw1dpdyst.ap-southeast-2.rds.amazonaws.com; Initial Catalog=salestrackerdb; User ID = salesTrackerdb; Password = tEh2GktSeoh2; MultipleActiveResultSets=False; Encrypt=True; TrustServerCertificate=True;";
-            services.AddDbContext<SalestrackerdbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SalesTrackerDatabse")));
+            services.AddDbContext<Salestrackerdbcontext>(options => options.UseSqlServer(Configuration.GetConnectionString("SalesTrackerDatabase")));
 
             
         }

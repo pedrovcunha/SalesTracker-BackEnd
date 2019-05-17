@@ -9,7 +9,7 @@ namespace SalesTracker.Infrastructure.Data.Repositories
 {
     public class OrdersRepository : GenericRepository<Orders>, IOrdersRepository
     {
-        public OrdersRepository(SalestrackerdbContext pDbContext): base(pDbContext)
+        public OrdersRepository(Salestrackerdbcontext pDbContext): base(pDbContext)
         {
 
         }

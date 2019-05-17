@@ -6,7 +6,7 @@ namespace SalesTracker.Infrastructure.Data.Repositories
 {
     public class RetailStoresRepository : GenericRepository<RetailStores>, IRetailStoresRepository
     {
-        public RetailStoresRepository(SalestrackerdbContext pDbContext) : base(pDbContext)
+        public RetailStoresRepository(Salestrackerdbcontext pDbContext) : base(pDbContext)
         {
 
         }

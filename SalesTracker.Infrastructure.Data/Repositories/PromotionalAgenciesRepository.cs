@@ -6,7 +6,7 @@ namespace SalesTracker.Infrastructure.Data.Repositories
 {
     public class PromotionalAgenciesRepository : GenericRepository<PromotionalAgencies>, IPromotionalAgenciesRepository
     {
-        public PromotionalAgenciesRepository(SalestrackerdbContext pDbContext) : base(pDbContext)
+        public PromotionalAgenciesRepository(Salestrackerdbcontext pDbContext) : base(pDbContext)
         {
 
         }

@@ -6,7 +6,7 @@ namespace SalesTracker.Infrastructure.Data.Repositories
 {
     public class AddressesRepository : GenericRepository<Addresses>, IAddressesRepository
     {
-        public AddressesRepository(SalestrackerdbContext pDbContext) : base(pDbContext)
+        public AddressesRepository(Salestrackerdbcontext pDbContext) : base(pDbContext)
         {
 
         }

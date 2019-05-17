@@ -6,7 +6,7 @@ namespace SalesTracker.Infrastructure.Data.Repositories
 {
     public class ProductssRepository: GenericRepository<Products>, IProductRepository
     {
-        public ProductssRepository(SalestrackerdbContext pDbContext):base(pDbContext)
+        public ProductssRepository(Salestrackerdbcontext pDbContext):base(pDbContext)
         {
 
         }

@@ -1,18 +1,20 @@
 ﻿using System;
+using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 using SalesTracker.Domain.Entities;
 using SalesTracker.Infrastructure.Data.EntityConfigurations;
 
 namespace SalesTracker.Infrastructure.Data.Context
 {
-    public partial class SalestrackerdbContext : DbContext
+    public partial class Salestrackerdbcontext : DbContext
     {
-        public SalestrackerdbContext()
+        public Salestrackerdbcontext()
         {
         }
 
-        public SalestrackerdbContext(DbContextOptions<SalestrackerdbContext> options)
+        public Salestrackerdbcontext(DbContextOptions<Salestrackerdbcontext> options)
             : base(options)
         {
         }
@@ -55,6 +57,21 @@ namespace SalesTracker.Infrastructure.Data.Context
             modelBuilder.ApplyConfiguration(new RetailStoresConfiguration());
             modelBuilder.ApplyConfiguration(new SalesRepresentativeConfiguration());
             modelBuilder.ApplyConfiguration(new StatesConfiguration());
+
+            base.OnModelCreating(modelBuilder);
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                //IConfigurationRoot configuration = new ConfigurationBuilder()
+                //   .SetBasePath(Directory.GetCurrentDirectory())
+                //   .AddJsonFile("appsettings.json")
+                //   .Build();
+                //var connectionString = configuration.GetConnectionString("SalesTrackerDatabase");
+                optionsBuilder.UseSqlServer("Server=salestrackerdbinstance.caqbw1dpdyst.ap-southeast-2.rds.amazonaws.com; Initial Catalog=salestrackerdb; User ID = salesTrackerdb; Password = tEh2GktSeoh2; MultipleActiveResultSets=False; Encrypt=True; TrustServerCertificate=True;");
+            }
         }
     }
 }

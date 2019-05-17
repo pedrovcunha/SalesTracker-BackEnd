@@ -14,9 +14,9 @@ namespace SalesTracker.WebAPI.Controllers
     [ApiController]
     public class OrdersController : ControllerBase
     {
-        private readonly SalestrackerdbContext _context;
+        private readonly Salestrackerdbcontext _context;
 
-        public OrdersController(SalestrackerdbContext context)
+        public OrdersController(Salestrackerdbcontext context)
         {
             _context = context;
         }

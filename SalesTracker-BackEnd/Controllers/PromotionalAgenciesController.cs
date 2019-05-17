@@ -14,9 +14,9 @@ namespace SalesTracker.WebAPI.Controllers
     [ApiController]
     public class PromotionalAgenciesController : ControllerBase
     {
-        private readonly SalestrackerdbContext _context;
+        private readonly Salestrackerdbcontext _context;
 
-        public PromotionalAgenciesController(SalestrackerdbContext context)
+        public PromotionalAgenciesController(Salestrackerdbcontext context)
         {
             _context = context;
         }

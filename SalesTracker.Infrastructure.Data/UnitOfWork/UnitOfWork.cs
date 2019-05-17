@@ -11,7 +11,7 @@ namespace SalesTracker.Infrastructure.Data.UnitOfWork
     // https://docs.microsoft.com/en-us/aspnet/mvc/overview/older-versions/getting-started-with-ef-5-using-mvc-4/implementing-the-repository-and-unit-of-work-patterns-in-an-asp-net-mvc-application
     public class UnitOfWork : IDisposable, IUnitOfWork
     {
-        private readonly SalestrackerdbContext _context = new SalestrackerdbContext();
+        private readonly Salestrackerdbcontext _context = new Salestrackerdbcontext();
         private AddressesRepository _addressesRepository;
         private CountriesRepository _countriesRepository;
         private BrandCategoriesRepository _itemCategoriesRepository;

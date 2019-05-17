@@ -14,9 +14,9 @@ namespace SalesTracker.WebAPI.Controllers
     [ApiController]
     public class BrandCategoriesController : ControllerBase
     {
-        private readonly SalestrackerdbContext _context;
+        private readonly Salestrackerdbcontext _context;
 
-        public BrandCategoriesController(SalestrackerdbContext context)
+        public BrandCategoriesController(Salestrackerdbcontext context)
         {
             _context = context;
         }

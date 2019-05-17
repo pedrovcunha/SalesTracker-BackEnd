@@ -6,7 +6,7 @@ namespace SalesTracker.Infrastructure.Data.Repositories
 {
     public class SalesRepresentativesRepository : GenericRepository<SalesRepresentatives>, ISalesRepresentativesRepository
     {
-        public SalesRepresentativesRepository(SalestrackerdbContext pDbContext) : base(pDbContext)
+        public SalesRepresentativesRepository(Salestrackerdbcontext pDbContext) : base(pDbContext)
         {
 
         }
