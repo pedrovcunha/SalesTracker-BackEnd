@@ -44,13 +44,16 @@ namespace SalesTracker.WebAPI
             services.AddScoped<IPeopleRepository, PeopleRepository>();
             services.AddScoped<IPostcodesRepository, PostcodesRepository>();
             services.AddScoped<IPromotionalAgenciesRepository, PromotionalAgenciesRepository>();
-            services.AddScoped<IRetailStoresRepository, IRetailStoresRepository>();
+            services.AddScoped<IRetailStoresRepository, RetailStoresRepository>();
             services.AddScoped<ISalesRepresentativesRepository, SalesRepresentativesRepository>();
             services.AddScoped<IStatesRepository, StatesRepository>();
-            
+
             //AddDefaultRepositories(services);
 
-
+            services.Configure<IISServerOptions>(options =>
+            {
+                options.AutomaticAuthentication = false;
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
