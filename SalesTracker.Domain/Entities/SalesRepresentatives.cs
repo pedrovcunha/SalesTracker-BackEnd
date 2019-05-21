@@ -8,6 +8,7 @@ namespace SalesTracker.Domain.Entities
         public SalesRepresentatives()
         {
             Orders = new HashSet<Orders>();
+            Sales = new HashSet<Sales>();
         }
 
         public int Id { get; set; }
@@ -19,5 +20,6 @@ namespace SalesTracker.Domain.Entities
         public virtual PromotionalAgencies PromotionAgency { get; set; }
         public virtual RetailStores RetailStore { get; set; }
         public virtual ICollection<Orders> Orders { get; set; }
+        public virtual ICollection<Sales> Sales { get; set; }
     }
 }

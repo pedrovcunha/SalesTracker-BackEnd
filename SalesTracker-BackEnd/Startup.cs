@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SalesTracker.Domain.Contracts.Repositories;
 using SalesTracker.Domain.Contracts.UnitOfWork;
+using SalesTracker.Infrastructure.Data;
 using SalesTracker.Infrastructure.Data.Context;
 using SalesTracker.Infrastructure.Data.Repositories;
 using SalesTracker.Infrastructure.Data.UnitOfWork;
@@ -63,10 +64,11 @@ namespace SalesTracker.WebAPI
             // Add responseCaching in thr browser.
             services.AddResponseCaching();
 
-            //var connection = "Server=salestrackerdbinstance.caqbw1dpdyst.ap-southeast-2.rds.amazonaws.com; Initial Catalog=salestrackerdb; User ID = salesTrackerdb; Password = tEh2GktSeoh2; MultipleActiveResultSets=False; Encrypt=True; TrustServerCertificate=True;";
-            services.AddDbContext<Salestrackerdbcontext>(options => options.UseSqlServer(Configuration.GetConnectionString("SalesTrackerDatabase")));
-
+            //https://docs.microsoft.com/en-us/ef/core/querying/related-data How to configure LazyLoad - EagerLoad
+            Settings.ConnectionString = Configuration.GetConnectionString("SalesTrackerDatabase");
+            services.AddDbContext<Salestrackerdbcontext>(options => options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("SalesTrackerDatabase")));
             
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

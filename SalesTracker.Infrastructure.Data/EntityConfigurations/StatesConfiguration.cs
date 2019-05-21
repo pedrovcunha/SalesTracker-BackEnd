@@ -19,7 +19,7 @@ namespace SalesTracker.Infrastructure.Data.EntityConfigurations
 
             builder.Property(e => e.CountryId).HasColumnName("CountryID");
 
-            builder.Property(e => e.Description)
+            builder.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(30);
 

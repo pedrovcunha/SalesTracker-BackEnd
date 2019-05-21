@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SalesTracker.Domain.Contracts.UnitOfWork;
 using SalesTracker.Domain.Entities;
 using SalesTracker.Infrastructure.Data.Context;
 
@@ -30,7 +31,7 @@ namespace SalesTracker.WebAPI.Controllers
 
         // GET: api/Countries/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Countries>> GetCountries(int id)
+        public async Task<ActionResult<Countries>> GetCountries([FromRoute]int id)
         {
             var countries = await _context.Countries.FindAsync(id);
 
@@ -44,9 +45,10 @@ namespace SalesTracker.WebAPI.Controllers
 
         // PUT: api/Countries/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCountries(int id, Countries countries)
+        public async Task<IActionResult> PutCountries([FromRoute]int id, [FromBody]Countries countries)
         {
-            if (id != countries.Id)
+            countries.Id = id;
+            if (id <= 0)
             {
                 return BadRequest();
             }
@@ -74,7 +76,7 @@ namespace SalesTracker.WebAPI.Controllers
 
         // POST: api/Countries
         [HttpPost]
-        public async Task<ActionResult<Countries>> PostCountries(Countries countries)
+        public async Task<ActionResult<Countries>> PostCountries([FromBody]Countries countries)
         {
             _context.Countries.Add(countries);
             await _context.SaveChangesAsync();
@@ -84,7 +86,7 @@ namespace SalesTracker.WebAPI.Controllers
 
         // DELETE: api/Countries/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Countries>> DeleteCountries(int id)
+        public async Task<ActionResult<Countries>> DeleteCountries([FromRoute]int id)
         {
             var countries = await _context.Countries.FindAsync(id);
             if (countries == null)

@@ -8,7 +8,7 @@ namespace SalesTracker.Domain.Entities
         public int OrderOrderId { get; set; }
         public int ProductProductId { get; set; }
 
-        public virtual Products ProductProduct { get; set; }
         public virtual Orders OrderOrder { get; set; }
+        public virtual Products ProductProduct { get; set; }
     }
 }

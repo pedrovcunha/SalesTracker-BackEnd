@@ -46,7 +46,8 @@ namespace SalesTracker.WebAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPostcodes(int id, Postcodes postcodes)
         {
-            if (id != postcodes.Id)
+            postcodes.Id = id;
+            if (id <= 0)
             {
                 return BadRequest();
             }

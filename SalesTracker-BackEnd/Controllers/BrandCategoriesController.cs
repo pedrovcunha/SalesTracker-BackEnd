@@ -46,7 +46,8 @@ namespace SalesTracker.WebAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBrandCategory(int id, BrandCategory brandCategory)
         {
-            if (id != brandCategory.Id)
+            brandCategory.Id = id;
+            if (id <= 0)
             {
                 return BadRequest();
             }

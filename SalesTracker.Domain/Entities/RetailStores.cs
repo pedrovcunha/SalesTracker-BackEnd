@@ -8,6 +8,7 @@ namespace SalesTracker.Domain.Entities
         public RetailStores()
         {
             Orders = new HashSet<Orders>();
+            Sales = new HashSet<Sales>();
             SalesRepresentatives = new HashSet<SalesRepresentatives>();
         }
 
@@ -17,6 +18,7 @@ namespace SalesTracker.Domain.Entities
 
         public virtual Addresses Address { get; set; }
         public virtual ICollection<Orders> Orders { get; set; }
+        public virtual ICollection<Sales> Sales { get; set; }
         public virtual ICollection<SalesRepresentatives> SalesRepresentatives { get; set; }
     }
 }

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SalesTracker.Domain.Contracts.UnitOfWork;
 using SalesTracker.Domain.Entities;
+using SalesTracker.Infrastructure.Data.Context;
+using SalesTracker.Infrastructure.Data.UnitOfWork;
 
 namespace SalesTracker.WebAPI.Controllers
 {
@@ -15,108 +17,53 @@ namespace SalesTracker.WebAPI.Controllers
     [ApiController]
     public class PeopleController : ControllerBase
     {
-        public delegate object DateTimePersonDob(string key, object value);
+        private readonly Salestrackerdbcontext _context;
 
-        private readonly IUnitOfWork _unitOfWork;
-
-        public PeopleController(IUnitOfWork unitOfWork)
+        public PeopleController(Salestrackerdbcontext context)
         {
-            _unitOfWork = unitOfWork;
+            _context = context;
         }
 
-        private async Task<bool> PersonExists(int id)
-        {
-            People person = await _unitOfWork.People.FindAsync(id);
-           return !person.Equals(null) ? true : false;
-        }
-
+        // GET: api/People
         [HttpGet]
-        [Produces(typeof(DbSet<People>))]
-        [ResponseCache(Duration = 60)]
-        public IActionResult GetPerson()
+        public async Task<ActionResult<IEnumerable<People>>> GetPeople()
         {
-            var results = new ObjectResult(_unitOfWork.People.GetAll())
-            {
-                StatusCode = (int)HttpStatusCode.OK
-            };
-
-            Request.HttpContext.Response.Headers.Add("X-Total-Count", _unitOfWork.People.GetAll().Count().ToString());
-
-            return results;
+            return await _context.People.ToListAsync();
         }
 
+        // GET: api/People/5
         [HttpGet("{id}")]
-        [Produces(typeof(People))]
-        [ResponseCache(Duration = 60)]
-        public async Task<IActionResult> GetPerson([FromRoute] int id)
+        public async Task<ActionResult<People>> GetPeople(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            var People = await _context.People.FindAsync(id);
 
-            var Person = await _unitOfWork.People.FindAsync(id);
-            var Person2 = _unitOfWork.People.GetByID(new People { Id = id });
-
-            if (Person == null)
+            if (People == null)
             {
                 return NotFound();
             }
 
-            return Ok(Person);
-
+            return People;
         }
 
-
-        [HttpPost]
-        [Produces(typeof(People))]
-        public async Task<IActionResult> PostPerson([FromBody] People Person)
-        {
-
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            // Id set as Identity by SQLServer - auto incremented - indexed
-            // if Person id is not set at the json.
-            //if (Person.Id == 0)
-            //{
-            //    int totalPersons = _unitOfWork.People.GetAll().Count();
-            //    Person.Id = totalPersons + 1;
-            //}
-
-
-            await _unitOfWork.People.AddAsync(Person);
-            _unitOfWork.Save();
-
-            return CreatedAtAction("GetPerson", new { id = Person.Id }, Person);
-        }
-
+        // PUT: api/People/5
         [HttpPut("{id}")]
-        [Produces(typeof(People))]
-        public async Task<IActionResult> PutPerson([FromRoute] int id, [FromBody] People Person)
+        public async Task<IActionResult> PutPeople(int id, People People)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != Person.Id)
+            People.Id = id;
+            if (id <= 0)
             {
                 return BadRequest();
             }
 
+            _context.Entry(People).State = EntityState.Modified;
+
             try
             {
-                _unitOfWork.People.Update(Person);
-                return Ok(Person);
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-
-                if (!await PersonExists(id))
+                if (!PeopleExists(id))
                 {
                     return NotFound();
                 }
@@ -126,25 +73,38 @@ namespace SalesTracker.WebAPI.Controllers
                 }
             }
 
+            return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        [Produces(typeof(People))]
-        public async Task<IActionResult> DeletePerson([FromRoute] int id)
+        // POST: api/People
+        [HttpPost]
+        public async Task<ActionResult<People>> PostPeople(People People)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            _context.People.Add(People);
+            await _context.SaveChangesAsync();
 
+            return CreatedAtAction("GetPeople", new { id = People.Id }, People);
+        }
 
-            if (!await PersonExists(id))
+        // DELETE: api/People/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<People>> DeletePeople(int id)
+        {
+            var People = await _context.People.FindAsync(id);
+            if (People == null)
             {
                 return NotFound();
             }
-            _unitOfWork.People.Delete(id);
 
-            return Ok();
+            _context.People.Remove(People);
+            await _context.SaveChangesAsync();
+
+            return People;
+        }
+
+        private bool PeopleExists(int id)
+        {
+            return _context.People.Any(e => e.Id == id);
         }
 
     }

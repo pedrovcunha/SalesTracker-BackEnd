@@ -12,6 +12,7 @@ namespace SalesTracker.Infrastructure.Data.UnitOfWork
     public class UnitOfWork : IDisposable, IUnitOfWork
     {
         private readonly Salestrackerdbcontext _context = new Salestrackerdbcontext();
+        
         private AddressesRepository _addressesRepository;
         private CountriesRepository _countriesRepository;
         private BrandCategoriesRepository _itemCategoriesRepository;
@@ -22,6 +23,7 @@ namespace SalesTracker.Infrastructure.Data.UnitOfWork
         private PostcodesRepository _postcodesRepository;
         private PromotionalAgenciesRepository _promotionalAgenciesRepository;
         private RetailStoresRepository _retailStoresRepository;
+        private SalesRepository _salesRepository;
         private SalesRepresentativesRepository _salesRepresentativesRepository;
         private StatesRepository _statesRepository;
         
@@ -36,6 +38,7 @@ namespace SalesTracker.Infrastructure.Data.UnitOfWork
         public IPostcodesRepository Postcodes => _postcodesRepository ?? (_postcodesRepository = new PostcodesRepository(_context));
         public IPromotionalAgenciesRepository PromotionalAgencies => _promotionalAgenciesRepository ?? (_promotionalAgenciesRepository = new PromotionalAgenciesRepository(_context));
         public IRetailStoresRepository RetailStores => _retailStoresRepository ?? (_retailStoresRepository = new RetailStoresRepository(_context));
+        public ISalesRepository SalesRepository => _salesRepository ?? (_salesRepository = new SalesRepository(_context));
         public ISalesRepresentativesRepository SalesRepresentatives => _salesRepresentativesRepository ?? (_salesRepresentativesRepository = new SalesRepresentativesRepository(_context));
         public IStatesRepository States => _statesRepository ?? (_statesRepository = new StatesRepository(_context));
 

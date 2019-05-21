@@ -10,49 +10,48 @@ using SalesTracker.Infrastructure.Data.Context;
 
 namespace SalesTracker.WebAPI.Controllers
 {
-    [Route("api/States")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class StatesController : ControllerBase
+    public class SalesController : ControllerBase
     {
         private readonly Salestrackerdbcontext _context;
 
-        public StatesController(Salestrackerdbcontext context)
+        public SalesController(Salestrackerdbcontext context)
         {
             _context = context;
         }
 
-        // GET: api/States
+        // GET: api/Sales
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<States>>> GetStates()
+        public async Task<ActionResult<IEnumerable<Sales>>> GetSales()
         {
-            return await _context.States.ToListAsync();
+            return await _context.Sales.ToListAsync();
         }
 
-        // GET: api/States/5
+        // GET: api/Sales/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<States>> GetStates(int id)
+        public async Task<ActionResult<Sales>> GetSales(int id)
         {
-            var states = await _context.States.FindAsync(id);
+            var sales = await _context.Sales.FindAsync(id);
 
-            if (states == null)
+            if (sales == null)
             {
                 return NotFound();
             }
 
-            return states;
+            return sales;
         }
 
-        // PUT: api/States/5
+        // PUT: api/Sales/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutStates(int id, States states)
+        public async Task<IActionResult> PutSales(int id, Sales sales)
         {
-            states.Id = id;
-            if (id <= 0)
+            if (id != sales.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(states).State = EntityState.Modified;
+            _context.Entry(sales).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +59,7 @@ namespace SalesTracker.WebAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!StatesExists(id))
+                if (!SalesExists(id))
                 {
                     return NotFound();
                 }
@@ -73,35 +72,35 @@ namespace SalesTracker.WebAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/States
+        // POST: api/Sales
         [HttpPost]
-        public async Task<ActionResult<States>> PostStates(States states)
+        public async Task<ActionResult<Sales>> PostSales(Sales sales)
         {
-            _context.States.Add(states);
+            _context.Sales.Add(sales);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetStates", new { id = states.Id }, states);
+            return CreatedAtAction("GetSales", new { id = sales.Id }, sales);
         }
 
-        // DELETE: api/States/5
+        // DELETE: api/Sales/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<States>> DeleteStates(int id)
+        public async Task<ActionResult<Sales>> DeleteSales(int id)
         {
-            var states = await _context.States.FindAsync(id);
-            if (states == null)
+            var sales = await _context.Sales.FindAsync(id);
+            if (sales == null)
             {
                 return NotFound();
             }
 
-            _context.States.Remove(states);
+            _context.Sales.Remove(sales);
             await _context.SaveChangesAsync();
 
-            return states;
+            return sales;
         }
 
-        private bool StatesExists(int id)
+        private bool SalesExists(int id)
         {
-            return _context.States.Any(e => e.Id == id);
+            return _context.Sales.Any(e => e.Id == id);
         }
     }
 }

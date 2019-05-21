@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using SalesTracker.Domain.Entities;
 using SalesTracker.Infrastructure.Data.EntityConfigurations;
 
+
 namespace SalesTracker.Infrastructure.Data.Context
 {
     public partial class Salestrackerdbcontext : DbContext
@@ -29,21 +30,14 @@ namespace SalesTracker.Infrastructure.Data.Context
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<PromotionalAgencies> PromotionalAgencies { get; set; }
         public virtual DbSet<RetailStores> RetailStores { get; set; }
+        public virtual DbSet<Sales> Sales { get; set; }
         public virtual DbSet<SalesRepresentatives> SalesRepresentatives { get; set; }
         public virtual DbSet<States> States { get; set; }
-
-//        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//        {
-//            if (!optionsBuilder.IsConfigured)
-//            {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-//                optionsBuilder.UseSqlServer("Server=salestrackerdbinstance.caqbw1dpdyst.ap-southeast-2.rds.amazonaws.com; Initial Catalog=salestrackerdb; User ID = salesTrackerdb; Password = tEh2GktSeoh2; MultipleActiveResultSets=False; Encrypt=True; TrustServerCertificate=True;");
-//            }
-//        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
+            base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new AddressesConfiguration());
             modelBuilder.ApplyConfiguration(new BrandCategoryConfiguration());
@@ -55,22 +49,18 @@ namespace SalesTracker.Infrastructure.Data.Context
             modelBuilder.ApplyConfiguration(new ProductsConfiguration());
             modelBuilder.ApplyConfiguration(new PromotionalAgenciesConfiguration());
             modelBuilder.ApplyConfiguration(new RetailStoresConfiguration());
+            modelBuilder.ApplyConfiguration(new SalesConfiguration());
             modelBuilder.ApplyConfiguration(new SalesRepresentativeConfiguration());
             modelBuilder.ApplyConfiguration(new StatesConfiguration());
 
-            base.OnModelCreating(modelBuilder);
+            
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                //IConfigurationRoot configuration = new ConfigurationBuilder()
-                //   .SetBasePath(Directory.GetCurrentDirectory())
-                //   .AddJsonFile("appsettings.json")
-                //   .Build();
-                //var connectionString = configuration.GetConnectionString("SalesTrackerDatabase");
-                optionsBuilder.UseSqlServer("Server=salestrackerdbinstance.caqbw1dpdyst.ap-southeast-2.rds.amazonaws.com; Initial Catalog=salestrackerdb; User ID = salesTrackerdb; Password = tEh2GktSeoh2; MultipleActiveResultSets=False; Encrypt=True; TrustServerCertificate=True;");
+                optionsBuilder.UseSqlServer(Settings.ConnectionString);
             }
         }
     }

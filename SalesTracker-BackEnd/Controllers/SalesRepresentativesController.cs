@@ -46,7 +46,8 @@ namespace SalesTracker.WebAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSalesRepresentatives(int id, SalesRepresentatives salesRepresentatives)
         {
-            if (id != salesRepresentatives.Id)
+            salesRepresentatives.Id = id;
+            if (id <= 0)
             {
                 return BadRequest();
             }

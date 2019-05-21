@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SalesTracker.Domain.Contracts.UnitOfWork;
 using SalesTracker.Domain.Entities;
 using SalesTracker.Infrastructure.Data.Context;
 
@@ -15,11 +17,17 @@ namespace SalesTracker.WebAPI.Controllers
     public class OrdersController : ControllerBase
     {
         private readonly Salestrackerdbcontext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
         public OrdersController(Salestrackerdbcontext context)
         {
             _context = context;
         }
+
+        //public OrdersController(IUnitOfWork unitOfWork)
+        //{
+        //    _unitOfWork = unitOfWork;
+        //}
 
         // GET: api/Orders
         [HttpGet]
@@ -33,6 +41,13 @@ namespace SalesTracker.WebAPI.Controllers
         public async Task<ActionResult<Orders>> GetOrders(int id)
         {
             var orders = await _context.Orders.FindAsync(id);
+            //var orderExpressions = new List<Expression<Func<Orders, bool>>> { x => x.Id == id };
+            //Expression<Func<Orders, bool>> expression = x => x.Id == id;
+            //string properties = "RetailStore";
+            //var orderIncludes = new List<Expression<Func<Orders, object>>> { x => x.RetailStore };
+
+            //var orders = await _unitOfWork.Orders.GetAll(orderExpressions.ToArray(), orderIncludes.ToArray()).FirstOrDefaultAsync();
+            //var orders = await _unitOfWork.Orders.Get(expression, null, properties).FirstOrDefaultAsync();
 
             if (orders == null)
             {
@@ -46,7 +61,8 @@ namespace SalesTracker.WebAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutOrders(int id, Orders orders)
         {
-            if (id != orders.Id)
+            orders.Id = id;
+            if (id <= 0)
             {
                 return BadRequest();
             }

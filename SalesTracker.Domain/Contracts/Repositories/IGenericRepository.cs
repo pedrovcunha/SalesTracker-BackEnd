@@ -11,7 +11,7 @@ namespace SalesTracker.Domain.Contracts.Repositories
     {
         IQueryable<T> GetAll();
         IQueryable<T> GetAll(Expression<Func<T, bool>>[] pExpressions, Expression<Func<T, object>>[] pIncludeProperties = null);
-        IEnumerable<T> Get(Expression<Func<T, bool>> pFilter, Func<IQueryable<T>, IOrderedQueryable<T>> pOrderBy = null, string includeProperties = "");
+        IQueryable<T> Get(Expression<Func<T, bool>> pFilter, Func<IQueryable<T>, IOrderedQueryable<T>> pOrderBy = null, string includeProperties = "");
         T GetByID(object pId);
         void Insert(T pEntity);
         void Delete(int pId);

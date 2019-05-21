@@ -37,6 +37,9 @@ namespace SalesTracker.Infrastructure.Data.Repositories
 
             items = items.Where(predicate);
 
+            foreach (var property in pIncludeProperties)
+                items = items.Include(property);
+
             if (pIncludeProperties != null)
             {
                 items = pIncludeProperties.Aggregate(items, (current, includeProperty) => current.Include(includeProperty));
@@ -49,7 +52,7 @@ namespace SalesTracker.Infrastructure.Data.Repositories
         {
             return _dbSet;
         }
-        public virtual IEnumerable<T> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = "")
+        public virtual IQueryable<T> Get(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = "")
         {
             IQueryable<T> query = _dbSet;
 
@@ -64,13 +67,16 @@ namespace SalesTracker.Infrastructure.Data.Repositories
                 query = query.Include(includeProperty);
             }
 
+            // if returns IEnumerable change for .List()
             if (orderBy != null)
             {
-                return orderBy(query).ToList();
+                //return orderBy(query).ToList();
+                return orderBy(query);
             }
             else
             {
-                return query.ToList();
+                //return query.ToList();
+                return query;
             }
         }
 

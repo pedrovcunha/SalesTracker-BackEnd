@@ -8,7 +8,7 @@ namespace SalesTracker.Infrastructure.Data.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Postcodes> builder)
         {
-            builder.Property(e => e.Description).HasMaxLength(50);
+            builder.Property(e => e.Suburb).HasMaxLength(50);
 
             builder.Property(e => e.StateId).HasColumnName("StateID");
 
@@ -16,6 +16,10 @@ namespace SalesTracker.Infrastructure.Data.EntityConfigurations
                 .WithMany(p => p.Postcodes)
                 .HasForeignKey(d => d.StateId)
                 .HasConstraintName("FK_Postcodes_States");
+
+            builder.Property(e => e.Latitude).HasColumnType("decimal(6,3)");
+
+            builder.Property(e => e.Longitude).HasColumnType("decimal(6,3)");
         }
     }
 }

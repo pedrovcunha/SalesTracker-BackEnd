@@ -23,6 +23,7 @@ namespace SalesTracker.WebAPI.Controllers
 
         // GET: api/Addresses
         [HttpGet]
+        [ResponseCache(Duration = 60)]
         public async Task<ActionResult<IEnumerable<Addresses>>> GetAddresses()
         {
             return await _context.Addresses.ToListAsync();
@@ -30,7 +31,8 @@ namespace SalesTracker.WebAPI.Controllers
 
         // GET: api/Addresses/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Addresses>> GetAddresses(int id)
+        [ResponseCache(Duration = 60)]
+        public async Task<ActionResult<Addresses>> GetAddresses([FromRoute]int id)
         {
             var addresses = await _context.Addresses.FindAsync(id);
 
@@ -44,9 +46,11 @@ namespace SalesTracker.WebAPI.Controllers
 
         // PUT: api/Addresses/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAddresses(int id, Addresses addresses)
+        public async Task<IActionResult> PutAddresses([FromRoute]int id, [FromBody] Addresses addresses)
         {
-            if (id != addresses.Id)
+            addresses.Id = id;
+
+            if (id <= 0)
             {
                 return BadRequest();
             }
@@ -74,7 +78,7 @@ namespace SalesTracker.WebAPI.Controllers
 
         // POST: api/Addresses
         [HttpPost]
-        public async Task<ActionResult<Addresses>> PostAddresses(Addresses addresses)
+        public async Task<ActionResult<Addresses>> PostAddresses([FromBody]Addresses addresses)
         {
             _context.Addresses.Add(addresses);
             await _context.SaveChangesAsync();
@@ -84,7 +88,7 @@ namespace SalesTracker.WebAPI.Controllers
 
         // DELETE: api/Addresses/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Addresses>> DeleteAddresses(int id)
+        public async Task<ActionResult<Addresses>> DeleteAddresses([FromRoute]int id)
         {
             var addresses = await _context.Addresses.FindAsync(id);
             if (addresses == null)
