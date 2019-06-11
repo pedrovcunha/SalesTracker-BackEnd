@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalesTracker.Domain", "Sale
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalesTracker.Infrastructure.Data", "SalesTracker.Infrastructure.Data\SalesTracker.Infrastructure.Data.csproj", "{10AA16BC-D98E-46B8-81A6-208634ACF417}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesTracker.Tests", "SalesTracker.Tests\SalesTracker.Tests.csproj", "{C62AA855-1E6C-4741-9367-B9D1AB747359}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{10AA16BC-D98E-46B8-81A6-208634ACF417}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10AA16BC-D98E-46B8-81A6-208634ACF417}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10AA16BC-D98E-46B8-81A6-208634ACF417}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C62AA855-1E6C-4741-9367-B9D1AB747359}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C62AA855-1E6C-4741-9367-B9D1AB747359}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C62AA855-1E6C-4741-9367-B9D1AB747359}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C62AA855-1E6C-4741-9367-B9D1AB747359}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

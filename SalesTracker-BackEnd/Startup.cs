@@ -62,11 +62,11 @@ namespace SalesTracker.WebAPI
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             // Add responseCaching in thr browser.
-            services.AddResponseCaching();
+            //services.AddResponseCaching();
 
             //https://docs.microsoft.com/en-us/ef/core/querying/related-data How to configure LazyLoad - EagerLoad
             Settings.ConnectionString = Configuration.GetConnectionString("SalesTrackerDatabase");
-            services.AddDbContext<Salestrackerdbcontext>(options => options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("SalesTrackerDatabase")));
+            services.AddDbContext<Salestrackerdbcontext>(options => options/*.UseLazyLoadingProxies()*/.UseSqlServer("Server=salestrackerdbinstance.caqbw1dpdyst.ap-southeast-2.rds.amazonaws.com; Initial Catalog=salestrackerdb; User ID = salesTrackerdb; Password = tEh2GktSeoh2; MultipleActiveResultSets=False; Encrypt=True; TrustServerCertificate=True;"));
             
 
         }
@@ -83,6 +83,8 @@ namespace SalesTracker.WebAPI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            
+            //app.UseResponseCaching();
 
             app.UseHttpsRedirection();
             app.UseMvc();
